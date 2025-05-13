@@ -15,5 +15,5 @@ const Comment = defineTable({
 });
 
 export default defineDb({
-  tables: { Comment },
+  tables: { Comment, Author },
 });
