@@ -9,37 +9,38 @@ import { db, Comment } from "astro:db";
 import { defineAction } from "astro:actions";
 import { z } from "astro:schema";
 
-export const server = {
-  addComment: defineAction({
-    // Actions include type safety with Zod, removing the need
-    // to check if typeof {value} === 'string' in your pages
-    input: z.object({
-      author: z.string(),
-      body: z.string(),
-    }),
-    handler: async (input) => {
-      const updatedComments = await db
-        .insert(Comment)
-        .values(input)
-        .returning(); // Return the updated comments
-      return updatedComments;
-    },
-  }),
-};
+// export const server = {
+//   addComment: defineAction({
+//     // Actions include type safety with Zod, removing the need
+//     // to check if typeof {value} === 'string' in your pages
+//     input: z.object({
+//       author: z.string(),
+//       body: z.string(),
+//     }),
+//     handler: async (input) => {
+//       const updatedComments = await db
+//         .insert(Comment)
+//         .values(input)
+//         .returning(); // Return the updated comments
+//       return updatedComments;
+//     },
+//   }),
+// };
 
-// export const prerender = false;
+export const prerender = false;
 // Astro.request.headers.get("cookies");
 
-// if (Astro.request.method === "POST") {
-//   // Parse form data
-//   const formData = await Astro.request.formData();
-//   const author = formData.get("author");
-//   const body = formData.get("body");
-//   if (typeof author === "string" && typeof body === "string") {
-//     // Insert form data into the Comment table
-//     await db.insert(Comment).values({ author, body });
-//   }
-// }
+if (Astro.request.method === "POST") {
+  // Parse form data
+  const formData = await Astro.request.formData();
+  const authorId = Number(formData.get("author"));
+  const body = formData.get("body");
+  if (typeof authorId === "number" && typeof body === "string") {
+    // Insert form data into the Comment table
+    console.log("jiji");
+    await db.insert(Comment).values({ authorId, body });
+  }
+}
 
 // Render the new list of comments on each request
 const comments = await db.select().from(Comment);
@@ -64,9 +65,9 @@ const comments = await db.select().from(Comment);
   </form>
   <div class="flex flex-col gap-4">
     {
-      comments.map(({ author, body }) => (
+      comments.map(({ authorId, body }) => (
         <article class="p-4 bg-zinc-100 rounded-xl border border-amber-800">
-          <p>Author: {author}</p>
+          <p>Author: {authorId}</p>
           <p>{body}</p>
         </article>
       ))
