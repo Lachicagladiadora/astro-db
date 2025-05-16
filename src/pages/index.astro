@@ -1,76 +1,18 @@
 ---
-// import Welcome from "../components/Welcome.astro";
-import Layout from "../layouts/Layout.astro";
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
-
-import { db, Comment } from "astro:db";
-import { defineAction } from "astro:actions";
-import { z } from "astro:schema";
-
-// export const server = {
-//   addComment: defineAction({
-//     // Actions include type safety with Zod, removing the need
-//     // to check if typeof {value} === 'string' in your pages
-//     input: z.object({
-//       author: z.string(),
-//       body: z.string(),
-//     }),
-//     handler: async (input) => {
-//       const updatedComments = await db
-//         .insert(Comment)
-//         .values(input)
-//         .returning(); // Return the updated comments
-//       return updatedComments;
-//     },
-//   }),
-// };
-
-export const prerender = false;
-// Astro.request.headers.get("cookies");
-
-if (Astro.request.method === "POST") {
-  // Parse form data
-  const formData = await Astro.request.formData();
-  const authorId = Number(formData.get("author"));
-  const body = formData.get("body");
-  if (typeof authorId === "number" && typeof body === "string") {
-    // Insert form data into the Comment table
-    console.log("jiji");
-    await db.insert(Comment).values({ authorId, body });
-  }
-}
-
-// Render the new list of comments on each request
-const comments = await db.select().from(Comment);
+// Welcome to Astro! Everything between these triple-dash code fences
+// is your "component frontmatter". It never runs in the browser.
+console.log("This runs in your terminal, not the browser!");
 ---
 
-<Layout>
-  <!-- <Welcome /> -->
-  <h2>Comments</h2>
-
-  <form method="POST" class="grid">
-    <label for="author"
-      >Author
-      <input id="author" name="author" />
-    </label>
-    <label for="body"
-      >Body
-      <textarea id="body" name="body"></textarea>
-    </label>
-
-    <button class="px-8 py-4 text-center bg-amber-300 rounded-xl">Submit</button
-    >
-  </form>
-  <div class="flex flex-col gap-4">
-    {
-      comments.map(({ authorId, body }) => (
-        <article class="p-4 bg-zinc-100 rounded-xl border border-amber-800">
-          <p>Author: {authorId}</p>
-          <p>{body}</p>
-        </article>
-      ))
-    }
-  </div>
-</Layout>
+<!-- Below is your "component template." It's just HTML, but with
+    some magic sprinkled in to help you build great templates. -->
+<html>
+  <body>
+    <h1>Hello, World!</h1>
+  </body>
+</html>
+<style>
+  h1 {
+    color: orange;
+  }
+</style>

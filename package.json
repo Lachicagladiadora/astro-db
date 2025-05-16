@@ -1,17 +1,18 @@
 {
-  "name": "test-astro-db",
-  "type": "module",
-  "version": "0.0.1",
+  "name": "astro-db",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "@astrojs/db": "^0.14.14",
-    "@tailwindcss/vite": "^4.1.6",
-    "astro": "^5.7.12",
-    "tailwindcss": "^4.1.6"
+    "astro": "^5.7.13"
   }
 }
