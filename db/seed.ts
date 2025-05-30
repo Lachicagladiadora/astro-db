@@ -7,6 +7,7 @@ export default async function seed() {
     userId: 1,
     email: "first@th.com",
     userName: "pu",
+    role: "admin",
     password: "123",
   });
 }

@@ -6,6 +6,7 @@ const User = defineTable({
     userId: column.number({ primaryKey: true }),
     userName: column.text(),
     email: column.text({ unique: true }),
+    role: column.text(),
     password: column.text(),
   },
   indexes: [{ on: ["userId"], unique: true }],

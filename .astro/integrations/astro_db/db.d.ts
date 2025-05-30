@@ -2,6 +2,6 @@
 declare module 'astro:db' {
 	export const User: import("@astrojs/db/runtime").Table<
 		"User",
-		{"userId":{"type":"number","schema":{"unique":false,"deprecated":false,"name":"userId","collection":"User","primaryKey":true}},"userName":{"type":"text","schema":{"unique":false,"deprecated":false,"name":"userName","collection":"User","primaryKey":false,"optional":false}},"email":{"type":"text","schema":{"unique":true,"deprecated":false,"name":"email","collection":"User","primaryKey":false,"optional":false}},"password":{"type":"text","schema":{"unique":false,"deprecated":false,"name":"password","collection":"User","primaryKey":false,"optional":false}}}
+		{"userId":{"type":"number","schema":{"unique":false,"deprecated":false,"name":"userId","collection":"User","primaryKey":true}},"userName":{"type":"text","schema":{"unique":false,"deprecated":false,"name":"userName","collection":"User","primaryKey":false,"optional":false}},"email":{"type":"text","schema":{"unique":true,"deprecated":false,"name":"email","collection":"User","primaryKey":false,"optional":false}},"role":{"type":"text","schema":{"unique":false,"deprecated":false,"name":"role","collection":"User","primaryKey":false,"optional":false}},"password":{"type":"text","schema":{"unique":false,"deprecated":false,"name":"password","collection":"User","primaryKey":false,"optional":false}}}
 	>;
 }
