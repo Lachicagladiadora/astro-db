@@ -1,13 +1,24 @@
-import { column, defineDb, NOW } from "astro:db";
+import { column, defineDb, defineTable } from "astro:db";
 
 // https://astro.build/db/config
-export default defineDb({
-  tables: {
-    columns: {
-      id: column.number({ primaryKey: true }),
-      author: column.text(),
-      content: column.text({ optional: true }),
-      published: column.date({ default: NOW }),
-    },
+const User = defineTable({
+  columns: {
+    userId: column.number({ primaryKey: true }),
+    userName: column.text(),
+    email: column.text({ unique: true }),
+    password: column.text(),
   },
+  indexes: [{ on: ["userId"], unique: true }],
 });
+export default defineDb({
+  tables: { User },
+});
+//   tables: {
+//     columns: {
+// id: column.number({ primaryKey: true }),
+// userName: column.text(),
+// email: column.text({ unique: true }),
+// password: column.text(),
+//     },
+//   },
+// });
