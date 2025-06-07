@@ -7,5 +7,4 @@ export const addUser = async (params) => {
     { params },
     { ...params, userId: 3, userName: "lu", role: "seller" }
   );
-  // return;<
 };
