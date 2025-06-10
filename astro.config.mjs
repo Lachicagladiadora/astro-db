@@ -6,5 +6,10 @@ import react from "@astrojs/react";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [db(), react()]
+  integrations: [db(), react()],
+  // redirects: {
+  //   "home": "/",
+  //   "signup": "/signup",
+  //   "signin": "/signin"
+  // }
 });

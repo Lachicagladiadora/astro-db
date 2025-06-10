@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { addUser } from "../repository/user.repository";
 
+// type SignUpFormProps = { redirectPath: string };
+// const cookie = Astro.request.headers.get("cookie");
+// if (!isLoggedIn(cookie)) {
+//   return Astro.redirect("/login");
+// }
+
 export const SignUpForm = () => {
   const [newUser, setNewUser] = useState<User>({
     email: "",
@@ -9,13 +15,20 @@ export const SignUpForm = () => {
 
   const onCreateNewUser = async (e: any) => {
     e.preventDefault();
-    console.log("initializing");
-    await addUser(newUser);
-    console.log("success");
+    // console.log("initializing");
+    const response = await addUser(newUser);
+    // const data = response;
+    // console.log("success", { data });
     setNewUser({
       email: "",
       password: "",
     });
+    if (response.status === 200) {
+      console.log("redirect to signin");
+      return;
+    }
+    console.log("not redirect");
+    return;
   };
 
   return (
