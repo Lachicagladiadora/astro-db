@@ -15,10 +15,7 @@ export const SignUpForm = () => {
 
   const onCreateNewUser = async (e: any) => {
     e.preventDefault();
-    // console.log("initializing");
     const response = await addUser(newUser);
-    // const data = response;
-    // console.log("success", { data });
     setNewUser({
       email: "",
       password: "",

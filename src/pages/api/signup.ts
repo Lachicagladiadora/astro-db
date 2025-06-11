@@ -1,15 +1,19 @@
 import type { APIRoute } from "astro";
-import { db, User } from "astro:db";
+// import { db, User } from "astro:db";
+import { decrypt } from "../../utils";
 
 export const prerender = false;
 
 export const POST: APIRoute = async ({ request }) => {
-  // const tt = await request.json();
+  // const tt = await decrypt(request.json());
+
   // console.log({ tt });
   // if (request.headers.get("Content-Type") === "application/json") {
   const body = await request.json();
-  // console.log({ params, request, body });
-  await db.insert(User).values(body);
+  console.log({ body });
+  const tt = await decrypt(body);
+  console.log({ request, body, tt });
+  // await db.insert(User).values(body);
   // await db.batch(User);
   //run middleware
   // region todo: validate, check saved & redirect in front
@@ -22,7 +26,7 @@ export const POST: APIRoute = async ({ request }) => {
   // }
   return new Response(
     JSON.stringify({
-      message: `User ${body.userName} created`,
+      message: `User  created`, //${body.userName}
     }),
     { status: 200 }
   );
