@@ -26,7 +26,8 @@ export const encrypt = async (data: string) => {
 // export const decrypt = (text: string) => {};
 export const decrypt = async (data: string) => {
   console.log("1", { data });
-  const base64Decoded = base64ToArrayBuffer(data);
+  const base64Decoded = base64ToArrayBuffer(data) as ArrayBuffer;
+  console.log("jeje", { base64Decoded });
   const decoded = await crypto.subtle.decrypt(
     { name: "AES-GCM", iv },
     key,
@@ -37,17 +38,19 @@ export const decrypt = async (data: string) => {
 };
 
 // aditional: conver to string and revert
-const arrayBufferToBase64 = (buffer) => {
+const arrayBufferToBase64 = (buffer: ArrayBuffer) => {
   const bytes = new Uint8Array(buffer);
   const binary = bytes.reduce((acc, b) => acc + String.fromCharCode(b), "");
   return btoa(binary); // base64 === string
 };
 
-const base64ToArrayBuffer = (base64) => {
+const base64ToArrayBuffer = (base64: string) => {
+  console.log({ base64 });
   const binary = atob(base64); // Decodifica base64 a texto binario
   const bytes = new Uint8Array(binary.length);
   for (let i = 0; i < binary.length; i++) {
     bytes[i] = binary.charCodeAt(i); // convierte cada carácter a byte
   }
+  console.log("jiji", bytes.buffer);
   return bytes.buffer;
 };

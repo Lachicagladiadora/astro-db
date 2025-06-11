@@ -9,10 +9,16 @@ export const POST: APIRoute = async ({ request }) => {
 
   // console.log({ tt });
   // if (request.headers.get("Content-Type") === "application/json") {
-  const body = await request.json();
+
+  const body = await request.text();
+  // const body = await request.json();
   console.log({ body });
   const tt = await decrypt(body);
-  console.log({ request, body, tt });
+
+  console.log({ tt });
+  // const tt = await decrypt(body);
+  // console.log({ request, body, tt });
+
   // await db.insert(User).values(body);
   // await db.batch(User);
   //run middleware
