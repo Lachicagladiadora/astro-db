@@ -15,16 +15,19 @@ export const SignUpForm = () => {
 
   const onCreateNewUser = async (e: any) => {
     e.preventDefault();
+    console.log("pu 1");
     const response = await addUser(newUser);
+    console.log("pu 2");
     setNewUser({
       email: "",
       password: "",
     });
-    if (response.status === 200) {
-      console.log("redirect to signin");
+    console.log("pu 3");
+    if (response.status !== 200) {
+      console.log("not redirect");
       return;
     }
-    console.log("not redirect");
+    console.log("redirect to signin");
     return;
   };
 
