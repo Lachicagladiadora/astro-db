@@ -1,9 +1,11 @@
-type User = {
+type CreateUser = {
   email: string;
   password: string;
 };
 
-type EncodeData = {
-  data: string;
-  initialVector: string;
+type User = {
+  id: string;
+  role: "seller" | "admin";
+  email: string;
+  password: string;
 };

@@ -4,7 +4,7 @@ import { navigate } from "astro:transitions/client";
 import { IS_EMAIL } from "../utils/regex.utils";
 
 export const SignUpForm = () => {
-  const [newUser, setNewUser] = useState<User>({
+  const [newUser, setNewUser] = useState<CreateUser>({
     email: "",
     password: "",
   });
