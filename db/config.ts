@@ -9,7 +9,7 @@ const User = defineTable({
     role: column.text(),
     password: column.text(),
   },
-  indexes: [{ on: ["id"], unique: true }],
+  // indexes: [{ on: ["id"]}],// automatically index by primaryKey
 });
 export default defineDb({
   tables: { User },
