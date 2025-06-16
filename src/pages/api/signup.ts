@@ -1,17 +1,29 @@
 import type { APIRoute } from "astro";
 import { db, User } from "astro:db";
+import { IS_EMAIL } from "../../utils/regex.utils";
 
 export const prerender = false;
 
 export const POST: APIRoute = async ({ request }) => {
-  const body = await request.json();
-  //validacion is an email?, the password have 8 characters?
-  const tt = await db.insert(User).values(body);
-  console.log({ tt });
-  return new Response(
-    JSON.stringify({
-      message: `User ${body.userName} created`,
-    }),
-    { status: 200 }
-  );
+  try {
+    const body = await request.json();
+    if (!IS_EMAIL.test(body.email)) throw Error("Email invalid");
+    if (body.password.length !== 8)
+      throw Error("The password must have 8 characters");
+    const tt = await db.insert(User).values(body);
+    console.log({ tt });
+    return new Response(
+      JSON.stringify({
+        message: `User ${body.userName} created`,
+      }),
+      { status: 200 }
+    );
+  } catch (error) {
+    return new Response(
+      JSON.stringify({
+        message: `${error}`,
+      }),
+      { status: 500 }
+    );
+  }
 };
