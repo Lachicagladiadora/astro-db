@@ -1,27 +1,28 @@
 import { useState } from "react";
-import { addUser } from "../repository/user.repository";
+import { getUser } from "../repository/user.repository";
 import { navigate } from "astro:transitions/client";
 import { IS_EMAIL } from "../utils/regex.utils";
 import { EMPTY_USER } from "../constants";
 
-export const SignUpForm = () => {
-  const [newUser, setNewUser] = useState<CreateUser>(EMPTY_USER);
+export const SignInForm = () => {
+  const [user, setUser] = useState<CreateUser>(EMPTY_USER);
 
-  const onCreateNewUser = async (e: any) => {
+  const onSignIn = async (e: any) => {
     try {
       e.preventDefault();
-      if (!IS_EMAIL.test(newUser.email)) {
+      if (!IS_EMAIL.test(user.email)) {
         throw Error("Email invalid");
       }
-      if (newUser.password.length !== 8) {
+      if (user.password.length !== 8) {
         throw Error("The password will have 8 characters");
       }
-      const response = await addUser(newUser);
-      setNewUser(EMPTY_USER);
+      const response = await getUser(user);
+      setUser(EMPTY_USER);
+
       if (response.status !== 200) {
         throw Error("Email or password invalid");
       }
-      navigate("/signin");
+      navigate("/");
     } catch (error) {
       console.error({ error });
     }
@@ -29,7 +30,7 @@ export const SignUpForm = () => {
 
   return (
     <form
-      onSubmit={(e) => onCreateNewUser(e)}
+      onSubmit={(e) => onSignIn(e)}
       style={{
         display: "flex",
         flexDirection: "column",
@@ -41,18 +42,16 @@ export const SignUpForm = () => {
         Email:{" "}
         <input
           type="email"
-          value={newUser.email}
-          onChange={(e) => setNewUser((p) => ({ ...p, email: e.target.value }))}
+          value={user.email}
+          onChange={(e) => setUser((p) => ({ ...p, email: e.target.value }))}
         />
       </label>
       <label>
         Password:{" "}
         <input
           type="text"
-          value={newUser.password}
-          onChange={(e) =>
-            setNewUser((p) => ({ ...p, password: e.target.value }))
-          }
+          value={user.password}
+          onChange={(e) => setUser((p) => ({ ...p, password: e.target.value }))}
         />
       </label>
       {/* <label>

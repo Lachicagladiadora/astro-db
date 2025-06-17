@@ -1,12 +1,18 @@
 ---
+import { eq } from "astro:db";
 import { User } from "astro:db";
 import { db } from "astro:db";
 
 // Welcome to Astro! Everything between these triple-dash code fences
 // is your "component frontmatter". It never runs in the browser.
 console.log("This runs in your terminal, not the browser!");
-const currentUser = await db.select().from(User);
-console.log({ currentUser });
+// const users = await db.select().from(User).get({});
+// console.log({ users });
+// const user = Array.from(A);
+// const title = Astro.locals
+// const data = Astro.locals.user.email;
+const data = Astro.locals;
+console.log({ data });
 ---
 
 <!-- Below is your "component template." It's just HTML, but with
@@ -14,9 +20,11 @@ console.log({ currentUser });
 <html>
   <body>
     <h1>Hello, World!</h1>
-    <p>I'm protected</p>
-    <!-- <p>{currentUser[0].role}</p>
-    <p>{currentUser[0].userName}</p> -->
+    <p style="color: orangered; font-weight: 600; font-size: larger;">
+      I'm protected
+    </p>
+    <!-- <p>{currentUser.role}</p> -->
+    <!-- <p>{currentUser.email}</p> -->
   </body>
 </html>
 <style>

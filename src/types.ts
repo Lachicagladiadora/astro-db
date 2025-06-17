@@ -3,6 +3,8 @@ type CreateUser = {
   password: string;
 };
 
+type GetUser = CreateUser;
+
 type User = {
   id: string;
   role: "seller" | "admin";

@@ -4,10 +4,10 @@ import { db, User } from "astro:db";
 export default async function seed() {
   // TODO
   await db.insert(User).values({
-    userId: "1",
+    id: "6e4642d0-d656-49b3-93ba-dcc341ff70b2",
     email: "first@th.com",
     // userName: "pu",
     role: "admin",
-    password: "123",
+    password: "12345678",
   });
 }

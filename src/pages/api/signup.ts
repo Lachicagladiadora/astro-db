@@ -10,8 +10,8 @@ export const POST: APIRoute = async ({ request }) => {
     if (!IS_EMAIL.test(body.email)) throw Error("Email invalid");
     if (body.password.length !== 8)
       throw Error("The password must have 8 characters");
-    const tt = await db.insert(User).values(body);
-    console.log({ tt });
+    await db.insert(User).values(body);
+    // console.log({ tt });
     return new Response(
       JSON.stringify({
         message: `User ${body.userName} created`,

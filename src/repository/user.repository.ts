@@ -10,3 +10,12 @@ export const addUser = async (params: CreateUser) => {
   });
   return new Response(await response.arrayBuffer());
 };
+
+export const getUser = async (params: GetUser) => {
+  const response = await fetch("http://localhost:4321/api/signin", {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(params),
+  });
+  return new Response(await response.arrayBuffer());
+};
