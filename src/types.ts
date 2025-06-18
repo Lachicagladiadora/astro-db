@@ -1,9 +1,7 @@
-type CreateUser = {
+type FormUser = {
   email: string;
   password: string;
 };
-
-type GetUser = CreateUser;
 
 type User = {
   id: string;

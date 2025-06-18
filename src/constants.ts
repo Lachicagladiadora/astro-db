@@ -1,4 +1,4 @@
-export const EMPTY_USER: CreateUser | GetUser = {
+export const EMPTY_USER: FormUser | FormUser = {
   email: "",
   password: "",
 };

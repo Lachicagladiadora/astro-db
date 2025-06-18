@@ -1,5 +1,5 @@
 export const addUser = async (
-  params: CreateUser
+  params: FormUser
 ): Promise<{ message: string }> => {
   const response = await fetch("http://localhost:4321/api/signup", {
     method: "POST",
@@ -17,9 +17,9 @@ export const addUser = async (
   return await response.json();
 };
 
-export const getUser = async (params: GetUser) => {
+export const getUser = async (params: FormUser) => {
   const response = await fetch("http://localhost:4321/api/signin", {
-    method: "GET",
+    method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(params),
   });

@@ -2,10 +2,10 @@ import { useState } from "react";
 import { addUser } from "../repository/user.repository";
 import { navigate } from "astro:transitions/client";
 import { EMPTY_USER } from "../constants";
-import { validateUser } from "../utils/validateUser";
+import { validateUser } from "../utils/validateUser.utils";
 
 export const SignUpForm = () => {
-  const [newUser, setNewUser] = useState<CreateUser>(EMPTY_USER);
+  const [newUser, setNewUser] = useState<FormUser>(EMPTY_USER);
 
   const onCreateNewUser = async (e: any) => {
     try {

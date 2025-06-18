@@ -1,6 +1,6 @@
 import { IS_EMAIL } from "./regex.utils";
 
-export const validateUser = (user: CreateUser | GetUser): boolean => {
+export const validateUser = (user: FormUser): boolean => {
   if (!IS_EMAIL.test(user.email)) {
     throw Error("Email invalid");
   }
