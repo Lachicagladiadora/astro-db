@@ -1,9 +1,10 @@
 import { type APIRoute } from "astro";
-import { db, User } from "astro:db";
+import { db, eq, User } from "astro:db";
 import jwt from "jsonwebtoken";
 
 import { IS_EMAIL } from "../../utils/regex.utils";
 import { SECRET } from "../../constants";
+import { getOneHourAfterNow } from "../../utils/date.utils";
 
 // var jwt = require("jsonwebtoken");
 export const prerender = false;
@@ -19,14 +20,20 @@ export const POST: APIRoute = async ({ cookies, request }) => {
     console.log("jij");
     // const users = await db.;
     // const user = await db.select().from(User).innerJoin(User, body.email);
-    const users = await db.select().from(User);
+    const users = await db
+      .select()
+      .from(User)
+      .where(eq(User.email, body.email))
+      .limit(1);
     console.log("jiji", { users });
-    const user = users.filter((c) => c.email === body.email);
+    const user = users[0];
+    //validate user
+    if (!user) throw Error("User not found");
     // console.log({ tt });
-    console.log("jaja", { user });
-    const accessToken = jwt.sign(user, SECRET, { expireIn: "1h" });
+    console.log("jaja", { user }, { SECRET });
+    const accessToken = jwt.sign(user, SECRET, { expiresIn: "1h" });
     console.log("jojo", { accessToken });
-    const refreshToken = jwt.sign(user, SECRET, { expireIn: "7d" });
+    const refreshToken = jwt.sign(user, SECRET, { expiresIn: "7d" });
     console.log("juju", { refreshToken });
     // const accessCookie = `auth_token=${accessToken}; HttpOnly; Path=/; Max-Age=3600; SameSite=Strict${
     //   import.meta.env.PROD ? "; Secure" : ""
@@ -55,6 +62,7 @@ export const POST: APIRoute = async ({ cookies, request }) => {
       })
     );
   } catch (error) {
+    console.error({ error });
     return new Response(
       JSON.stringify({
         message: `${error}`,
