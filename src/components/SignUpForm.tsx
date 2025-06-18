@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { addUser } from "../repository/user.repository";
 import { navigate } from "astro:transitions/client";
-import { IS_EMAIL } from "../utils/regex.utils";
 import { EMPTY_USER } from "../constants";
+import { validateUser } from "../utils/validateUser";
 
 export const SignUpForm = () => {
   const [newUser, setNewUser] = useState<CreateUser>(EMPTY_USER);
@@ -10,17 +10,9 @@ export const SignUpForm = () => {
   const onCreateNewUser = async (e: any) => {
     try {
       e.preventDefault();
-      if (!IS_EMAIL.test(newUser.email)) {
-        throw Error("Email invalid");
-      }
-      if (newUser.password.length !== 8) {
-        throw Error("The password will have 8 characters");
-      }
-      const response = await addUser(newUser);
+      validateUser(newUser);
+      await addUser(newUser);
       setNewUser(EMPTY_USER);
-      if (response.status !== 200) {
-        throw Error("Email or password invalid");
-      }
       navigate("/signin");
     } catch (error) {
       console.error({ error });

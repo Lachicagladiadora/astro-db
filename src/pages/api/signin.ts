@@ -18,15 +18,16 @@ export const GET: APIRoute = async ({ cookies, request }) => {
     const accessToken = jwt.sign(user, SECRET, { expireIn: "1h" });
     const refreshToken = jwt.sign(user, SECRET, { expireIn: "7d" });
 
-    const accessCookie = `auth_token=${accessToken}; HttpOnly; Path=/; Max-Age=3600; SameSite=Strict${
-      import.meta.env.PROD ? "; Secure" : ""
-    }`;
+    // const accessCookie = `auth_token=${accessToken}; HttpOnly; Path=/; Max-Age=3600; SameSite=Strict${
+    //   import.meta.env.PROD ? "; Secure" : ""
+    // }`;
 
-    const refreshCookie = `auth_token=${refreshToken}; HttpOnly; Path=/; Max-Age=3600; SameSite=Strict${
-      import.meta.env.PROD ? "; Secure" : ""
-    }`;
-    // cookies.set(accessToken, SECRET, { path: "/" });
+    // const refreshCookie = `auth_token=${refreshToken}; HttpOnly; Path=/; Max-Age=3600; SameSite=Strict${
+    //   import.meta.env.PROD ? "; Secure" : ""
+    // }`;
+    cookies.set("accessCookies", accessToken, { expires: "" });
     // cookies.set(refreshToken, SECRET, { path: "/" });
+    // cookies.set("counter", String(counter));
 
     return new Response(
       JSON.stringify({

@@ -1,4 +1,6 @@
-export const addUser = async (params: CreateUser) => {
+export const addUser = async (
+  params: CreateUser
+): Promise<{ message: string }> => {
   const response = await fetch("http://localhost:4321/api/signup", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -8,7 +10,11 @@ export const addUser = async (params: CreateUser) => {
       role: "seller",
     }),
   });
-  return new Response(await response.arrayBuffer());
+  // response.status
+  if (response.status !== 200) {
+    throw Error("Email or password invalid");
+  }
+  return await response.json();
 };
 
 export const getUser = async (params: GetUser) => {
@@ -17,5 +23,8 @@ export const getUser = async (params: GetUser) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(params),
   });
-  return new Response(await response.arrayBuffer());
+  if (response.status !== 200) {
+    throw Error("Email or password invalid");
+  }
+  return response;
 };
