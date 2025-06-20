@@ -2,9 +2,10 @@ import { type APIRoute } from "astro";
 
 export const prerender = false;
 
-export const GET: APIRoute = async ({ cookies }) => {
+export const POST: APIRoute = async ({ cookies }) => {
   try {
-    cookies.delete;
+    cookies.delete("accessCookies");
+    cookies.delete("refreshCookies");
     return new Response(
       JSON.stringify({
         status: 200,

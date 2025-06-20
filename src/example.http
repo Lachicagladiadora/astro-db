@@ -24,3 +24,7 @@ GET http://localhost:4321/protected HTTP/1.1
 
 ###
 POST http://localhost:4321/signout HTTP/1.1
+content-type: application/json
+{
+
+}

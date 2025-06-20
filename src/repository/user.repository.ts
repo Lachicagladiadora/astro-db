@@ -17,7 +17,7 @@ export const addUser = async (
   return await response.json();
 };
 
-export const getUser = async (params: FormUser) => {
+export const signIn = async (params: FormUser) => {
   const response = await fetch("http://localhost:4321/api/signin", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -25,6 +25,18 @@ export const getUser = async (params: FormUser) => {
   });
   if (response.status !== 200) {
     throw Error("Email or password invalid");
+  }
+  return response;
+};
+
+export const signOut = async (params) => {
+  const response = await fetch("http://localhost:4321/api/signout", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(params),
+  });
+  if (response.status !== 200) {
+    throw Error(response.statusText);
   }
   return response;
 };
