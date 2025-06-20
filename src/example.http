@@ -1,0 +1,26 @@
+GET http://localhost:4321 HTTP/1.1
+
+###
+
+POST http://localhost:4321/signup HTTP/1.1
+content-type: application/json
+
+{
+    "email": "pu@gmail.com",
+    "password": "asdfghjk"
+}
+
+###
+POST http://localhost:4321/signin HTTP/1.1
+content-type: application/json
+
+{
+    "email": "pu@gmail.com",
+    "password": "asdfghjk"
+}
+
+###
+GET http://localhost:4321/protected HTTP/1.1
+
+###
+POST http://localhost:4321/signout HTTP/1.1
