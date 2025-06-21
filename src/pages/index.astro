@@ -1,15 +1,22 @@
 ---
+import { SignOutButton } from "../components/SignOutButton";
+
 const data = Astro.locals.user;
 console.log({ data });
 ---
 
 <html>
   <body>
-    <h1>Hello, World!</h1>
+    {!data && <p style="color: orangered; font-weight: 600; font-size: larger;">
+      You don't have access. I'm protected
+    </p>}
+   {data &&  <h1>Hello, World!</h1>
     <p style="color: orangered; font-weight: 600; font-size: larger;">
-      I'm protected
+      Great! you have access
     </p>
     <p>{data}</p>
+    <SignOutButton client:idle/>
+    }
   </body>
 </html>
 <style>
