@@ -5,7 +5,11 @@ import { EMPTY_USER } from "../constants";
 import { validateUser } from "../utils/validateUser.utils";
 
 export const SignUpForm = () => {
-  const [newUser, setNewUser] = useState<FormUser>(EMPTY_USER);
+  // const [newUser, setNewUser] = useState<FormUser>(EMPTY_USER);
+  const [newUser, setNewUser] = useState<FormUser>({
+    email: "pu@gmail.com",
+    password: "asdfghjk",
+  });
 
   const onCreateNewUser = async (e: any) => {
     try {

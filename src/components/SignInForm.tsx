@@ -1,17 +1,21 @@
 import { useState } from "react";
-import { getUser } from "../repository/user.repository";
+import { signIn } from "../repository/user.repository";
 import { navigate } from "astro:transitions/client";
 import { EMPTY_USER } from "../constants";
 import { validateUser } from "../utils/validateUser.utils";
 
 export const SignInForm = () => {
-  const [user, setUser] = useState<FormUser>(EMPTY_USER);
+  // const [user, setUser] = useState<FormUser>(EMPTY_USER);
+  const [user, setUser] = useState<FormUser>({
+    email: "pu@gmail.com",
+    password: "asdfghjk",
+  });
 
   const onSignIn = async (e: any) => {
     try {
       e.preventDefault();
       validateUser(user);
-      await getUser(user);
+      await signIn(user);
       setUser(EMPTY_USER);
       navigate("/");
     } catch (error) {

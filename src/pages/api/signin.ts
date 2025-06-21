@@ -21,8 +21,8 @@ export const POST: APIRoute = async ({ cookies, request }) => {
       .limit(1);
     const user = users[0];
     if (!user) throw Error("User not found");
-    const accessToken = jwt.sign(user, SECRET, { expiresIn: "1h" });
-    const refreshToken = jwt.sign(user, SECRET, { expiresIn: "7d" });
+    const accessToken = jwt.sign(user.id, SECRET, { expiresIn: "1h" });
+    const refreshToken = jwt.sign(user.id, SECRET, { expiresIn: "7d" });
 
     cookies.set("accessCookies", accessToken, {
       expires: getOneHourAfterNow(),
