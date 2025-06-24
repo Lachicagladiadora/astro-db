@@ -1,8 +1,6 @@
 import type { APIRoute } from "astro";
 
-export const GET: APIRoute = async ({ params, request, locals }) => {
-  // return new Response("Hi PROTECTED", { status: 200 });
-
+export const GET: APIRoute = async ({ locals }) => {
   try {
     console.log("hi protected");
     const user = locals.user;

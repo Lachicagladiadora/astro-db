@@ -10,7 +10,6 @@ export const addUser = async (
       role: "seller",
     }),
   });
-  // response.status
   if (response.status !== 200) {
     throw Error("Email or password invalid");
   }
