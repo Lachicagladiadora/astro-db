@@ -4,8 +4,8 @@ export const GET: APIRoute = async ({ locals }) => {
   try {
     console.log("hi protected");
     const user = locals.user;
+    console.log({ user });
     if (!user) throw Error("You need access for this content");
-
     return new Response(
       JSON.stringify({
         message: "Great!, you have access",

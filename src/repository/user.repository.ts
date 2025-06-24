@@ -22,6 +22,7 @@ export const signIn = async (params: FormUser) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(params),
   });
+  console.log({ response });
   if (response.status !== 200) {
     throw Error("Email or password invalid");
   }
