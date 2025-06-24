@@ -14,7 +14,7 @@ export const POST: APIRoute = async ({ request }) => {
     // console.log({ tt });
     return new Response(
       JSON.stringify({
-        message: `User ${body.userName} created`,
+        message: `User ${body.email} created`,
       }),
       { status: 200 }
     );

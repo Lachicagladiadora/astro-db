@@ -6,13 +6,17 @@ export const Protected = () => {
   );
 
   const getProtectedData = () => {
-    console.log("loading protected data");
+    try {
+      console.log("loading protected data");
+    } catch (error) {
+      console.error({ error });
+    }
   };
 
   return (
     <div>
       {protectedData}
-      <button onClick={}>get protected contend</button>
+      <button onClick={getProtectedData}>get protected contend</button>
     </div>
   );
 };
