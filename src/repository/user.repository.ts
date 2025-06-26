@@ -29,11 +29,10 @@ export const signIn = async (params: FormUser) => {
   return response;
 };
 
-export const signOut = async (params) => {
+export const signOut = async () => {
   const response = await fetch("http://localhost:4321/api/signout", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(params),
   });
   if (response.status !== 200) {
     throw Error(response.statusText);

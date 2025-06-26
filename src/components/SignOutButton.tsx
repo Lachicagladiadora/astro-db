@@ -1,27 +1,17 @@
-import { useState } from "react";
+import { navigate } from "astro/virtual-modules/transitions-router.js";
+import { signOut } from "../repository/user.repository";
 
-type SignOutButtonProps = { currentUser: string };
-
-export const SignOutButton = ({ currentUser }: SignOutButtonProps) => {
-  const [user, setUser] = useState<string | null>(currentUser);
-
-  const onSignOut = () => {
+export const SignOutButton = () => {
+  const onSignOut = async () => {
     try {
-      console.log("success, session closed");
+      const response = await signOut();
+      const res = await response.json();
+      console.log({ response: res.message });
+      navigate("/signin");
     } catch (error) {
       console.error({ error });
     }
   };
 
-  return (
-    <>
-      {!user && (
-        <>
-          <a href="/signin">Sign In</a>
-          <a href="/signup">Create Account</a>
-        </>
-      )}
-      {user && <button onClick={onSignOut}>SignOutButton</button>}
-    </>
-  );
+  return <button onClick={onSignOut}>SignOutButton</button>;
 };

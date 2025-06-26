@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+// const currentUser = Astro.locals.user;
+
 export const Protected = () => {
   const [protectedData, setProtectedData] = useState(
     "Press button for access to content"
