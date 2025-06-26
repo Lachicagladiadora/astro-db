@@ -1,15 +1,16 @@
 import { useState } from "react";
-
-// const currentUser = Astro.locals.user;
+import { getProtected } from "../repository/protected.repository";
 
 export const Protected = () => {
   const [protectedData, setProtectedData] = useState(
     "Press button for access to content"
   );
 
-  const getProtectedData = () => {
+  const getProtectedData = async () => {
     try {
-      console.log("loading protected data");
+      const res = await getProtected();
+      const response = await res.json();
+      setProtectedData(response.message);
     } catch (error) {
       console.error({ error });
     }
