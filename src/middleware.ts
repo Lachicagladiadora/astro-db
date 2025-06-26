@@ -3,11 +3,8 @@ import { SECRET } from "./constants";
 import { getOneHourAfterNow } from "./utils/date.utils";
 
 export const onRequest = (context, next) => {
-  console.log("Hi! middleware");
-  const ll = context.locals.user;
   const access = context.cookies.get("accessCookies");
   const refresh = context.cookies.get("refreshCookies");
-  console.log({ access, refresh });
   if (!access) return next();
   if (!refresh) return next();
   const userDataAccess = jwt.verify(access.value, SECRET);
@@ -23,10 +20,5 @@ export const onRequest = (context, next) => {
     return next();
   }
   context.locals.user = userDataAccess.userId;
-  //
-  const tt = context.locals.user;
-  console.log({ userDataAccess, userDataRefresh });
-  console.log("end middleware", { ll }, { tt });
-  // here validate tockens, it's all for the protected
   return next();
 };

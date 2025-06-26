@@ -1,6 +1,11 @@
 ---
+import { navigate } from "astro/virtual-modules/transitions-router.js";
 import { Protected } from "../components/Protected";
 import { SignOutButton } from "../components/SignOutButton";
+
+const data = Astro.locals.user;
+console.log({ data });
+if (!data) navigate("/signin");
 ---
 
 <html>
@@ -8,9 +13,10 @@ import { SignOutButton } from "../components/SignOutButton";
     <SignOutButton client:idle />
     <Protected client:idle />
   </body>
+
+  <style>
+    body {
+      background: orange;
+    }
+  </style>
 </html>
-<style>
-  body {
-    background: orange;
-  }
-</style>
