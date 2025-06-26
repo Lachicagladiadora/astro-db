@@ -23,7 +23,7 @@ content-type: application/json
 
 ###
 GET http://localhost:4321/api/protected HTTP/1.1
-# content-type: application/json
+content-type: application/json
 
 ###
 POST http://localhost:4321/api/signout HTTP/1.1

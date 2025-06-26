@@ -4,6 +4,7 @@ import { getOneHourAfterNow } from "./utils/date.utils";
 
 export const onRequest = (context, next) => {
   console.log("Hi! middleware");
+  const ll = context.locals.user;
   const access = context.cookies.get("accessCookies");
   const refresh = context.cookies.get("refreshCookies");
   console.log({ access, refresh });
@@ -21,9 +22,11 @@ export const onRequest = (context, next) => {
     context.locals.user = userDataAccess.userId;
     return next();
   }
-  context.locals.user = userDataAccess;
+  context.locals.user = userDataAccess.userId;
   //
+  const tt = context.locals.user;
   console.log({ userDataAccess, userDataRefresh });
+  console.log("end middleware", { ll }, { tt });
   // here validate tockens, it's all for the protected
   return next();
 };

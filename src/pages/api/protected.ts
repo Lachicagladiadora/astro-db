@@ -1,10 +1,11 @@
 import type { APIRoute } from "astro";
 
-export const GET: APIRoute = async ({ locals }) => {
+export const GET: APIRoute = async (context) => {
   try {
     console.log("hi protected");
-    const user = locals.user;
-    console.log({ user });
+    const user = context.locals?.user;
+    const ji = context.locals;
+    console.log({ user, ji });
     if (!user) throw Error("You need access for this content");
     return new Response(
       JSON.stringify({
